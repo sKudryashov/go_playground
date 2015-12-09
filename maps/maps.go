@@ -1,36 +1,39 @@
 package maps
 
 import (
-	"../branching"
+	"github.com/sKudryashov/go_playground/branching"
 	"fmt"
 )
 
 type NorwegianGreeting struct {
-	code string
+	code     string
 	fullname string
 }
 
 type Salutation struct {
-	Name string
+	Name     string
 	Greeting string
 }
 
-func MapPrefixes (nation string) (data string) {
+func MapPrefixes(nation string) (data string) {
+
 	var prefix = make(map[string]string)
-	prefix[branching.NATION_UKRAINIAN]=" Pan "
-	prefix[branching.NATION_JAPANESE]= " San "
+
+	prefix[branching.NATION_UKRAINIAN] = " Pan "
+	prefix[branching.NATION_JAPANESE] = " San "
 	prefix["British"] = " Mr "
 	prefix["Canadian"] = " Dear sir "
 
 	return prefix[nation]
 }
 
-func MapGreetingPrefixes (nation string) (data string) {
+func MapGreetingPrefixes(nation string) (data string) {
+
 	var prefix = map[string]string{
 		"JapanGreeting": nation,
 		"ChineseGreeting": "Lee",
 	}
-	// let's check the whether the key in map exists and then
+	// let's check whether the key in map exists and then
 	// delete it. This checking is not required though ...
 	// delete works without it as well
 	if value, exists := prefix["ChineseGreeting"]; exists {
@@ -40,8 +43,10 @@ func MapGreetingPrefixes (nation string) (data string) {
 	return prefix[nation]
 }
 
-func CountryCodes () (capacity, length int, codes interface{}) {
+func CountryCodes() (capacity, length int, codes interface{}) {
 	var mainCodes = make([]string, 3, 4)
+
+	// extending fixed sized slice
 	secondaryCodes := [...]string{"Uganda", "Russia", "Botswana"}
 
 	mainCodes = append(mainCodes, "US")
@@ -52,14 +57,14 @@ func CountryCodes () (capacity, length int, codes interface{}) {
 	mainCodes[2] = "Sweden"
 
 	norwegianGreeting := []NorwegianGreeting{
-				{"Uga", "Uganda"},
-				{"Ru", "Russia"},
-     }
+		{"Uga", "Uganda"},
+		{"Ru", "Russia"},
+	}
 
 	codePairs := []NorwegianGreeting{
-		{ "Bob", "Hello"},
-		{ "Joe", "Hi"},
-		{ "Mary", "What is up?"},
+		{"Bob", "Hello"},
+		{"Joe", "Hi"},
+		{"Mary", "What is up?"},
 	}
 	codePairs = append(codePairs, codePairs...)
 
@@ -73,5 +78,6 @@ func CountryCodes () (capacity, length int, codes interface{}) {
 	fmt.Println("norwegianGreeting:", norwegianGreeting, " len and capacity ", len(norwegianGreeting), cap(norwegianGreeting))
 	fmt.Println("Code pairs:", codePairs, " len and capacity ", len(codePairs), cap(codePairs))
 	fmt.Println("slice Deleted : ", codePairsDeleted, " len and capacity ", len(codePairsDeleted), cap(codePairsDeleted))
+
 	return cap(mainCodes), len(mainCodes), mainCodes
 }

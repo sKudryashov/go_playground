@@ -23,6 +23,16 @@ type GreetingShow interface {
 	ShowGreetings()
 }
 
+type temporary interface {
+	Temporary() bool
+}
+
+// IsTemporary returns true if err is temporary.
+func IsTemporary(err error) bool {
+	te, ok := err.(temporary)
+	return ok && te.Temporary()
+}
+
 type Write interface  {
 	Write(p []byte) (n int, err error)
 }
@@ -37,6 +47,15 @@ func (manager GreetingsManager) Write(p []byte) (n int, err error) {
 func (manager *GreetingsManager) SaySomething() {
 	fmt.Println("SaySomething call :) from Greetings manager")
 }
+
+func (greeting *Greetings) PushGreeting(manager GreetingsManager) {
+	//make()
+	//append(Greetings, manager)
+}
+
+//func (greeting *Greetings) PullGreeting() *Greetings {
+//	return Greetings
+//}
 
 func (manager *GreetingsManager) AddSimpleGreeting () {
 	manager.Country = "country"

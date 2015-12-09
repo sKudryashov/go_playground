@@ -2,7 +2,7 @@ package loops
 
 import (
 	"fmt"
-	"../branching"
+	"github.com/sKudryashov/go_playground/branching"
 )
 
 func MultipleGreeting()  {

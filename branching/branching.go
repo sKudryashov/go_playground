@@ -34,6 +34,7 @@ func getSuffix(nation string) (suffix string) {
 }
 
 func GetTypeOfTheVar(x interface{})  {
+
 	switch t := x.(type) {
 	case int: fmt.Println("Given type is int", t)
 	case string: fmt.Println("Given type is string")
@@ -44,6 +45,7 @@ func GetTypeOfTheVar(x interface{})  {
 }
 
 func getPrefix (nation string) (prefix string) {
+
 	switch nation {
 		case NATION_UKRAINIAN: prefix = " Pan "
 		case NATION_JAPANESE: prefix = " San "

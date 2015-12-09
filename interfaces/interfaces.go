@@ -1,4 +1,5 @@
 package interfaces
+//For interface instance look at methods.go
 
 import "fmt"
 

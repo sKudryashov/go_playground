@@ -4,14 +4,15 @@ import (
 	"fmt"
 	"strings"
 	"os"
-	"./branching"
-	"./loops"
-	"./maps"
-	"./interfaces"
-	"./variables"
+	"github.com/sKudryashov/go_playground/branching"
+	"github.com/sKudryashov/go_playground/loops"
+	"github.com/sKudryashov/go_playground/maps"
+	"github.com/sKudryashov/go_playground/interfaces"
+	"github.com/sKudryashov/go_playground/variables"
 	"reflect"
-	"./methods"
-	"./concurrency"
+	"github.com/sKudryashov/go_playground/methods"
+	"github.com/sKudryashov/go_playground/concurrency"
+	"github.com/sKudryashov/go_playground/flow"
 )
 
 type UserGreeting struct {
@@ -58,19 +59,25 @@ func main() {
 	fmt.Println("Just a one message left:", message)
 	fmt.Println("Japan type of system greeting: ", japanAuthor, japanMessage)
 	fmt.Println(branching.MakeCustomGreet("japan", branching.NATION_JAPANESE, branching.NATION_UKRAINIAN))
+
 	branching.GetTypeOfTheVar(japanFactory)
 	branching.GetTypeOfTheVar(2)
-	loops.MultipleGreeting();
+
+	loops.MultipleGreeting()
+
 	japanGreetingAsSlice := []branching.JapanGreeting{
 		{"Tetsuya", "Komuro"},
 		{"Satoshi", "Tomie"},
 		{"Takish", "Shita"},
 	}
+
 	loops.MultipleMapGreeting(japanGreetingAsSlice);
 	loops.WhileMapGreeting()
 	loops.ForGreeting()
 	loops.MultipleGreeting()
+
 	fmt.Println(maps.MapPrefixes("Canadian"))
+
 	maps.CountryCodes()
 	maps.MapPrefixes("British")
 	maps.MapGreetingPrefixes("Canadian")
@@ -93,34 +100,32 @@ func main() {
 	fmt.Println(putinFansGreetingRef)
 	fmt.Println(interfaces.GetGreetingsForPutinFans())
 
-//	Country string
-//	Text string
-//	GMT int
-
-	greetings := methods.Greetings{
-		{"USA", "Hi folks", 9},
-		{"CAN", "Je vu i", 10},
-		{"MEX", "Estrado di biando", 7},
-	}
-
 	greetingsManager := methods.GreetingsManager {
 		Country:"BRA",
 		Text:"Estrado di biando",
 		GMT:6,
 	}
 
+	greetings := methods.Greetings{
+		{"USA", "Hi folks", 9},
+		{"CAN", "Je vu i", 10},
+		{"MEX", "Estrado di biando", 7},
+		greetingsManager,
+	}
+
 	greetingsManager.AddSimpleGreeting()
 	makeGreetingFromMethPackage(&greetingsManager)
+	
 	greetings.ShowGreetings()
 	greetings.SpinGreetings()
 
 	//io.Writer implementation
 	fmt.Fprint(greetingsManager, "Good news, get buffer")
 //
-//	methods.GreetingsManager.AddSimpleGreeting()
-//	methods.GreetingsManager.AddSimpleGreeting()
+	methods.GreetingsManager.AddSimpleGreeting()
+	methods.GreetingsManager.AddSimpleGreeting()
     concurrency.Launch()
-
+	flow.InitFlow()
 }
 
 func makeGreetingFromMethPackage(m methods.GreetingAble)  {
@@ -131,7 +136,9 @@ func makeGreetingFromMethPackage(m methods.GreetingAble)  {
 
 //Closure works as usual there
 func getJapanGreetingFactory(author string) GreetingFactory {
+
 	var passwordWord string = "Nakamichi"
+
 	return func(message string) (str1, str2 string) {
 		var one string = "Yakamotu coageri"
 		var two string = author + "-san, password " + passwordWord
