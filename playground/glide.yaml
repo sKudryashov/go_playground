@@ -1,0 +1,6 @@
+package: github.com/sKudryashov/go_playground
+import:
+- package: github.com/prometheus/client_golang
+  version: ~0.9.0-pre1
+  subpackages:
+  - api

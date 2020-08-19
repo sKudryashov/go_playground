@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package pb;
+
+service GraphService {
+    rpc Put(Graph) returns (Status) {};
+    rpc GetLast(Search) returns (Path) {};
+    rpc Delete(Graph) returns (Status) {};
+}
+
+enum Code {
+    OK = 0;
+    ERROR = 1;
+}
+
+message Status {
+    string ID = 1;
+    Code Code = 2;
+}
+
+// Node represents a graph node, with tho 
+message Edge {
+    uint32 A = 1;
+    uint32 B = 2;
+}
+
+message Graph {
+    repeated Edge Edges = 1;
+    string ID = 2;
+}
+
+message Search {
+    uint32 Src = 1;
+    uint32 Dst = 2;
+    string ID = 3;
+}
+
+message Path {
+    repeated uint32 Node = 1;
+    string ID = 2;
+}

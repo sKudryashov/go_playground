@@ -1,0 +1,13 @@
+---
+version: "2.0"
+services:
+  graphsrv:
+    restart: always
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: graphsrv
+    ports:
+      - "50051:50051"
+    environment:
+      TZ: US/Pacific
